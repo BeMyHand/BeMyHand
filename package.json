@@ -19,7 +19,6 @@
     "html-docx-js": "^0.3.1",
     "html-to-docx": "^1.1.32",
     "lodash": "^4.17.20",
-    "node-sass": "^4.14.1",
     "notistack": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -29,6 +28,7 @@
     "react-scripts": "^3.4.4",
     "react-speech-recognition": "^3.2.3",
     "react-webcam": "^5.2.2",
+    "sass": "^1.32.8",
     "save-as": "^0.1.8"
   },
   "scripts": {
