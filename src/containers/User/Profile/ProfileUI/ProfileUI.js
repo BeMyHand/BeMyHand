@@ -365,7 +365,7 @@ const ProfileUI = (props) => {
                   Published Articles
                 </h2>
               )}
-              {/*<div className="profile__activity--blogs-my-blogs">
+              <div className="profile__activity--blogs-my-blogs">
                    {myLatestArticles ? (
                       myLatestArticles.map((article) => (
                           <ArticleCard
@@ -391,7 +391,7 @@ const ProfileUI = (props) => {
                         ))}
                       </React.Fragment>
                   )}
-                </div> */}
+                </div>
               <a
                 className="profile__activity--blogs-view"
                 onClick={viewMyAllBlogs}
@@ -405,7 +405,7 @@ const ProfileUI = (props) => {
                 <h2 className="profile__activity--blogs-heading">
                   My Favorites
                 </h2>
-                {/* <div className="profile__activity--blogs-my-blogs">
+                <div className="profile__activity--blogs-my-blogs">
                   {myLatestFavArticles ? (
                       myLatestFavArticles.map((article) => (
                           <ArticleCard
@@ -430,7 +430,7 @@ const ProfileUI = (props) => {
                         ))}
                       </React.Fragment>
                   )}
-                </div> */}
+                </div>
                 <a
                   className="profile__activity--blogs-view"
                   onClick={viewAllFavBlogs}
