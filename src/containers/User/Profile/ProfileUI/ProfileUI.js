@@ -16,7 +16,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import Modal from "@material-ui/core/Modal";
 import CameraFrontIcon from '@material-ui/icons/CameraFront';
 import WebcamCapture from "../../../../components/WebcamCapture/WebcamCapture";
-import {EditorState, convertFromRaw} from 'draft-js';
 
 
 
@@ -290,68 +289,91 @@ const ProfileUI = (props) => {
   }
 
     return (
-        <React.Fragment>
-          {loading ? <LinearProgress /> : ""}
-          <div className="profile">
-            <div className="profile__details">
-              <div className="profile__details--content">
-                <div
-                    className="profile__details--content-profile-pic"
-                    style={{ backgroundImage: `url(${profilePicture})` }}
-                >
-                  {userId === JSON.parse(localStorage.getItem("user")).userId && view === "Private View"
-                      ? <React.Fragment>
-                        {/*<label*/}
-                        {/*  htmlFor="upload-image"*/}
-                        {/*  className="profile__details--content-profile-pic-change"*/}
-                      {/*>*/}
-                      <div className="profile__details--content-profile-pic-change">
-                        <h3 onClick={uploadProfilePicture}>Upload New</h3>
-                      </div>
-                      {/*</label>*/}
-                  </React.Fragment> : <></>
-                  }
-                </div>
-                <h2 className="profile__details--content-username">
-                  {username}
-                </h2>
-
-                {userId === JSON.parse(localStorage.getItem("user")).userId ?
-                    <div style={{textAlign: "center"}}>
-                      <Button variant="contained" color="primary" onClick={profileViewHandler}>
-                        {view === "Public View" ? "Private View" : "Public View"}
-                      </Button>
-                    </div> : <div style={{marginBottom: "-3rem"}}/> }
-                <BottomNavigation
-                    // value={value}
-                    // onChange={(event, newValue) => {
-                    //   setValue(newValue);
-                    // }}
-                    onChange={(event, newValue) => navigationHandler(event,newValue)}
-                    showLabels
-                    className="profile__details--content-menu"
-                >
-                  <BottomNavigationAction label="Articles" icon={<DescriptionIcon />} />
-                  <BottomNavigationAction label="Resume" icon={<ViewDayIcon />} />
-                  <BottomNavigationAction label="Portfolio" icon={<PictureInPictureIcon/>} />
-                </BottomNavigation>
+      <React.Fragment>
+        {loading ? <LinearProgress /> : ""}
+        <div className="profile">
+          <div className="profile__details">
+            <div className="profile__details--content">
+              <div
+                className="profile__details--content-profile-pic"
+                style={{ backgroundImage: `url(${profilePicture})` }}
+              >
+                {userId === JSON.parse(localStorage.getItem("user")).userId &&
+                view === "Private View" ? (
+                  <React.Fragment>
+                    {/*<label*/}
+                    {/*  htmlFor="upload-image"*/}
+                    {/*  className="profile__details--content-profile-pic-change"*/}
+                    {/*>*/}
+                    <div className="profile__details--content-profile-pic-change">
+                      <h3 onClick={uploadProfilePicture}>Upload New</h3>
+                    </div>
+                    {/*</label>*/}
+                  </React.Fragment>
+                ) : (
+                  <></>
+                )}
               </div>
-              <div className="profile__details--boundary"/>
+              <h2 className="profile__details--content-username">{username}</h2>
+
+              {userId === JSON.parse(localStorage.getItem("user")).userId ? (
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={profileViewHandler}
+                  >
+                    {view === "Public View" ? "Private View" : "Public View"}
+                  </Button>
+                </div>
+              ) : (
+                <div style={{ marginBottom: "-3rem" }} />
+              )}
+              <BottomNavigation
+                // value={value}
+                // onChange={(event, newValue) => {
+                //   setValue(newValue);
+                // }}
+                onChange={(event, newValue) =>
+                  navigationHandler(event, newValue)
+                }
+                showLabels
+                className="profile__details--content-menu"
+              >
+                <BottomNavigationAction
+                  label="Articles"
+                  icon={<DescriptionIcon />}
+                />
+                <BottomNavigationAction label="Resume" icon={<ViewDayIcon />} />
+                <BottomNavigationAction
+                  label="Portfolio"
+                  icon={<PictureInPictureIcon />}
+                />
+              </BottomNavigation>
             </div>
-            <div className="profile__activity">
-              <div className="profile__activity--blogs">
-                {userId === JSON.parse(localStorage.getItem("user")).userId && view === "Private View" ?
-                    <h2 className="profile__activity--blogs-heading">My Published Articles</h2>
-                    : <h2 className="profile__activity--blogs-heading">Published Articles</h2> }
-                <div className="profile__activity--blogs-my-blogs">
-                  {myLatestArticles ? (
+            <div className="profile__details--boundary" />
+          </div>
+          <div className="profile__activity">
+            <div className="profile__activity--blogs">
+              {userId === JSON.parse(localStorage.getItem("user")).userId &&
+              view === "Private View" ? (
+                <h2 className="profile__activity--blogs-heading">
+                  My Published Articles
+                </h2>
+              ) : (
+                <h2 className="profile__activity--blogs-heading">
+                  Published Articles
+                </h2>
+              )}
+              {/*<div className="profile__activity--blogs-my-blogs">
+                   {myLatestArticles ? (
                       myLatestArticles.map((article) => (
                           <ArticleCard
                               key={article._id}
                               id={article._id}
                               title={article.Title}
                               picture={article.PictureSecureId}
-                              body={EditorState.createWithContent(convertFromRaw(JSON.parse(article.Body)))}
+                              body={article.Body}
                               postedOn={article.PostedOn}
                               author = {article.Author.authorName}
                           />
@@ -368,18 +390,21 @@ const ProfileUI = (props) => {
                         ))}
                       </React.Fragment>
                   )}
-                </div>
-                <a
-                    className="profile__activity--blogs-view"
-                    onClick={viewMyAllBlogs}
-                >
-                  View All
-                </a>
-              </div>
-              {userId === JSON.parse(localStorage.getItem("user")).userId && view === "Private View" ?
+                </div> */}
+              <a
+                className="profile__activity--blogs-view"
+                onClick={viewMyAllBlogs}
+              >
+                View All
+              </a>
+            </div>
+            {userId === JSON.parse(localStorage.getItem("user")).userId &&
+            view === "Private View" ? (
               <div className="profile__activity--my-favorites">
-                <h2 className="profile__activity--blogs-heading">My Favorites</h2>
-                <div className="profile__activity--blogs-my-blogs">
+                <h2 className="profile__activity--blogs-heading">
+                  My Favorites
+                </h2>
+                {/* <div className="profile__activity--blogs-my-blogs">
                   {myLatestFavArticles ? (
                       myLatestFavArticles.map((article) => (
                           <ArticleCard
@@ -404,87 +429,92 @@ const ProfileUI = (props) => {
                         ))}
                       </React.Fragment>
                   )}
-                </div>
+                </div> */}
                 <a
-                    className="profile__activity--blogs-view"
-                    onClick={viewAllFavBlogs}
+                  className="profile__activity--blogs-view"
+                  onClick={viewAllFavBlogs}
                 >
                   View All
                 </a>
               </div>
-                  : <></>}
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <Modal
+          style={modalStyle}
+          open={modelOpen}
+          onClose={ModalClosedHandler}
+          // aria-labelledby="simple-modal-title"
+          // aria-describedby="simple-modal-description"
+        >
+          <div style={modalBodyStyle}>
+            <h4 style={{ marginBottom: "2rem", textAlign: "center" }}>
+              Please Select Upload method
+            </h4>
+            <input
+              id="upload-image"
+              class="upload-image"
+              type="file"
+              onChange={fileSelectedHandler}
+            />
+            <div>
+              <Button
+                style={{ margin: "1rem" }}
+                variant="contained"
+                color="default"
+                startIcon={<CloudUploadIcon />}
+                ref={textInput}
+                onClick={() => {
+                  document.getElementById("upload-image").click();
+                }}
+              >
+                Upload from computer
+              </Button>
+              <Button
+                style={{ margin: "1rem" }}
+                variant="contained"
+                color="default"
+                startIcon={<CameraFrontIcon />}
+                onClick={uploadPictureFromWebcamHandler}
+              >
+                Take Picture From Webcam
+              </Button>
             </div>
           </div>
-          <Modal
-              style={modalStyle}
-              open={modelOpen}
-              onClose={ModalClosedHandler}
-              // aria-labelledby="simple-modal-title"
-              // aria-describedby="simple-modal-description"
-          >
-            <div style={modalBodyStyle}>
-              <h4 style={{marginBottom:"2rem",textAlign:"center"}}>Please Select Upload method</h4>
-              <input
-                  id="upload-image"
-                  class="upload-image"
-                  type="file"
-                  onChange={fileSelectedHandler}
+        </Modal>
+
+        <Modal
+          style={modalStyle}
+          open={webcamModalOpen}
+          onClose={ProfileModalClosedHandler}
+          // aria-labelledby="simple-modal-title"
+          // aria-describedby="simple-modal-description"
+        >
+          <div style={modalBodyStyle}>
+            <h4 style={{ marginBottom: "2rem", textAlign: "center" }}>
+              {addFacialAuth
+                ? "Please Capture a Straight and Clear Photo for Facial Authentication"
+                : "Please Capture Profile Image"}
+            </h4>
+            <input
+              id="upload-image"
+              class="upload-image"
+              type="file"
+              onChange={fileSelectedHandler}
+            />
+            <div>
+              <WebcamCapture
+                fileSelectedHandler={fileSelectedHandler}
+                ProfileModalClosedHandler={ProfileModalClosedHandler}
+                addFacialAuth={addFacialAuth}
+                addFacialAuthHandler={addFacialAuthHandler}
               />
-              <div>
-                <Button
-                    style={{margin:"1rem"}}
-                    variant="contained"
-                    color="default"
-                    startIcon={<CloudUploadIcon />}
-                    ref = {textInput}
-                    onClick={()=>{
-                      document.getElementById("upload-image").click();
-                    }}
-                >
-                  Upload from computer
-                </Button>
-                <Button
-                    style={{margin:"1rem"}}
-                    variant="contained"
-                    color="default"
-                    startIcon={<CameraFrontIcon />}
-                    onClick={uploadPictureFromWebcamHandler}
-                >
-                  Take Picture From Webcam
-                </Button>
-              </div>
             </div>
-          </Modal>
-
-
-          <Modal
-              style={modalStyle}
-              open={webcamModalOpen}
-              onClose={ProfileModalClosedHandler}
-              // aria-labelledby="simple-modal-title"
-              // aria-describedby="simple-modal-description"
-          >
-            <div style={modalBodyStyle}>
-              <h4 style={{marginBottom:"2rem",textAlign:"center"}}>
-                {addFacialAuth ? "Please Capture a Straight and Clear Photo for Facial Authentication" : "Please Capture Profile Image"}</h4>
-              <input
-                  id="upload-image"
-                  class="upload-image"
-                  type="file"
-                  onChange={fileSelectedHandler}
-              />
-              <div>
-                <WebcamCapture
-                    fileSelectedHandler = {fileSelectedHandler}
-                    ProfileModalClosedHandler = {ProfileModalClosedHandler}
-                    addFacialAuth = {addFacialAuth}
-                    addFacialAuthHandler = {addFacialAuthHandler}
-                    />
-              </div>
-            </div>
-          </Modal>
-
-        </React.Fragment>
+          </div>
+        </Modal>
+      </React.Fragment>
     );
 }
 
