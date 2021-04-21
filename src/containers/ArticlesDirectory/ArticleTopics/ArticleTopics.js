@@ -12,39 +12,52 @@ const ArticleTopics = (props) => {
 
     //Registered voice commads for this article
     const commands = [
-        {
-            command: 'create new article',
-            callback: () => props.history.push('/new-article'),
-            description: 'Opens the text editor to create a new article',
+      {
+        command: "create new article",
+        callback: () => props.history.push("/new-article"),
+        description: "Opens the text editor to create a new article",
+      },
+      {
+        command: "open user profile",
+        callback: () =>
+          props.history.push(
+            `/profile/${JSON.parse(localStorage.getItem("user")).userId}`
+          ),
+        description: "Opens user profile",
+      },
+      {
+        command: "go back",
+        callback: () => props.history.goBack(),
+        description: "Goes back to the previous page",
+      },
+      {
+        command: "open *",
+        callback: (articleTopic) => showArticlesByTopicHandler(articleTopic),
+        description: "Opens an article topic",
+      },
+      {
+        command: "search",
+        callback: () => {
+          props.history.push(`${props.match.url}/All%20Articles/search`);
         },
-        {
-            command: 'open user profile',
-            callback: () => props.history.push('/profile/5fdd051402816535287cb8fa'),
-            description: 'Opens user profile',
-        },
-        {
-            command: 'go back',
-            callback: () => props.history.goBack(),
-            description: "Goes back to the previous page",
-        },
-        {
-            command: 'open *',
-            callback: (articleTopic) => showArticlesByTopicHandler(articleTopic),
-            description: 'Opens an article topic'
-        },
-        {
-            command: 'search',
-            callback: () => {props.history.push(`${props.match.url}/All%20Articles/search`)},
-            description: 'Search in the entire directory'
-        },
-        {
-            command: 'scroll down',
-            callback: () => window.scrollTo({top: window.pageYOffset+500,behavior:"smooth"})
-        },
-        {
-            command: 'scroll up',
-            callback: () => window.scrollTo({top: window.pageYOffset-500,behavior:"smooth"})
-        }
+        description: "Search in the entire directory",
+      },
+      {
+        command: "scroll down",
+        callback: () =>
+          window.scrollTo({
+            top: window.pageYOffset + 500,
+            behavior: "smooth",
+          }),
+      },
+      {
+        command: "scroll up",
+        callback: () =>
+          window.scrollTo({
+            top: window.pageYOffset - 500,
+            behavior: "smooth",
+          }),
+      },
     ];
 
     //On componentDidMount, set the new commands in the sidebar
