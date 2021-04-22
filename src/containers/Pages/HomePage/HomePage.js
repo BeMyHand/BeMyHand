@@ -44,7 +44,10 @@ function HomePageManager(props) {
     const commands = [
         {
             command: 'Navigate *',
-            callback: cmd => handleNavigation('Navigate', cmd)
+            callback: cmd => {
+                handleNavigation('Navigate', cmd)
+                console.log(cmd);
+            }
         },
         {
             command: 'remove',

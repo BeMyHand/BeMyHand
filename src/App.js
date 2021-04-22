@@ -28,6 +28,7 @@ import ArticlesPage from "./containers/Pages/ArticlesPage/ArticlesPage";
 
 import './App.css';
 import Sidebar from "./containers/Sidebar";
+import BMHPortfolioBuilder from './containers/BMHPortfolioBuilder/BMHPortfolioBuilder';
 
 const TextEditor = lazy(() => import("./containers/TextEditor"));
 
@@ -51,6 +52,7 @@ function App(props) {
             return setSidebarStateFunc;
         });
     };
+
 
 
     return (
@@ -86,6 +88,13 @@ function App(props) {
                                 <Suspense fallback={<LinearProgress />}>
                                     <TextEditor
                                         doc={true}
+                                        setCommands={newState => setSidebarState(newState)}
+                                        {...props} />
+                                </Suspense>)
+                            }/>
+                            <Route path="/portfolio-builder" render={props => (
+                                <Suspense fallback={<LinearProgress />}>
+                                    <BMHPortfolioBuilder
                                         setCommands={newState => setSidebarState(newState)}
                                         {...props} />
                                 </Suspense>)

@@ -330,9 +330,6 @@ function TextEditor(props) {
 
     ];
 
-
-
-
     const updateSidebar = () => {
         if (props.editor) {
             commands.push()
@@ -340,15 +337,11 @@ function TextEditor(props) {
         props.setCommands(commands);
     }
 
-
-
-
     const commandsAndDesc = [];
 
     commands.forEach(cmd => {
         commandsAndDesc.push({command: cmd.command, description: cmd.description})
     })
-
 
     useEffect(() => {
         updateSidebar()
